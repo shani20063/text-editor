@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Text Editor</title>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.editor {
+    display: flex;
+    flex-direction: column;
+}
+
+#text-area {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 10px;
+}
+
+.toolbar {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+button, select {
+    padding: 5px;
+    margin: 0;
+}
+
+.color-btn {
+    width: 20px;
+    height: 20px;
+    border: none;
+    cursor: pointer;
+}
+  </style>
+</head>
+<body>
+    <div class="container">
+        <div class="editor">
+            <textarea id="text-area"></textarea>
+            <div class="toolbar">
+                <button onclick="formatText('bold').text-area();">B</button>
+                <button onclick="formatText('italic')">I</button>
+                <button onclick="formatText('underline')">U</button>
+                <button onclick="formatText('strikethrough')">S</button>
+                
+                <select id="font-size" onchange="changeFontSize()">
+                    <option value="1px">1</option>
+                    <option value="6px" selected>6</option>
+                    <option value="12px">12</option>
+                    <option value="18px">18</option>
+                    <option value="24px">24</option>
+                    <option value="30px">30</option>
+                </select>
+                <select id="font-family" onchange="changeFontFamily()">
+                    <option value="Arial">Arial</option>
+                    <option value="Courier New">Courier New</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                </select>
+                <select id="text-case" onchange="changeTextCase()">
+                    <option value="none">None</option>
+                    <option value="uppercase">Uppercase</option>
+                    <option value="lowercase">Lowercase</option>
+                </select>
+                <div class="colors">
+                    <button class="color-btn" style="background-color: #f00;" onclick="changeColor('#f00')"></button>
+                    <button class="color-btn" style="background-color: #0f0;" onclick="changeColor('#0f0')"></button>
+                    <button class="color-btn" style="background-color: #00f;" onclick="changeColor('#00f')"></button>
+                    <!-- Add more color buttons as needed -->
+                </div>
+                <button onclick="updateText()">Update</button>
+            </div>
+        </div>
+    </div>
+    <script>
+       
+ /* function formatText(command) {
+    document.execCommand(command, false, null);
+}
+
+function changeFontSize() {
+    const size = document.getElementById('font-size').value;
+    document.execCommand('fontSize', false, size);
+}
+
+function changeFontFamily() {
+    const family = document.getElementById('font-family').value;
+    document.execCommand('fontName', false, family);
+}*/
+
+function changeColor(color) {
+var text= document.getElementById("text-area")
+text.style.color = color;
+            }
+function changeFontFamily() {
+            var font = document.getElementById("font-family").value;
+            var textArea = document.getElementById("text-area");
+            textArea.style.fontFamily = font;
+           }
+
+function changeFontSize() {
+            var size = document.getElementById("font-size");
+            var textArea = document.getElementById("text-area");
+            textArea.style.fontSize = size.value;
+
+            }
+
+const textArea = document.getElementById('text-area');
+        const toolbar = document.querySelector('.toolbar');
+        const buttons = toolbar.querySelectorAll('button');
+          function  formatText(format) {
+            if (format === 'bold') {
+                textArea.style.fontWeight = 'bold';
+                } else if (format === 'italic') {
+                    textArea.style.fontStyle = 'italic';
+                    } else if (format === 'underline') {
+                        textArea.style.textDecoration = 'underline';
+                        } else if (format === 'strikethrough') {
+                            textArea.style.textDecoration = 'line-through';
+                            }
+                        }
+                            
+
+function changeTextCase() {
+    const caseOption = document.getElementById('text-case').value;
+    const textArea = document.getElementById('text-area');
+    if (caseOption === 'uppercase') {
+        textArea.value = textArea.value.toUpperCase();
+    } else if (caseOption === 'lowercase') {
+        textArea.value = textArea.value.toLowerCase();
+    }
+}
+
+/*function changeColor(color) {
+    document.execCommand('foreColor', false, color);
+}*/
+
+function updateText()
+{
+
+ changeTextCase();
+}
+
+
+  </script>
+</body>
+</html>
